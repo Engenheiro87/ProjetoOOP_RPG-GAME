@@ -1,0 +1,60 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="YmBPCKOPWGOfkV5zx1LG">
+    <mxGraphModel dx="1617" dy="1020" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="OG3XqojVWxAMTLAOR4AO-3" edge="1" parent="1" source="OG3XqojVWxAMTLAOR4AO-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="OG3XqojVWxAMTLAOR4AO-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OG3XqojVWxAMTLAOR4AO-5" edge="1" parent="1" source="OG3XqojVWxAMTLAOR4AO-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="OG3XqojVWxAMTLAOR4AO-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OG3XqojVWxAMTLAOR4AO-7" edge="1" parent="1" source="OG3XqojVWxAMTLAOR4AO-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="OG3XqojVWxAMTLAOR4AO-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fjuK2MNivoumrqlP2kkL-7" edge="1" parent="1" source="OG3XqojVWxAMTLAOR4AO-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="fjuK2MNivoumrqlP2kkL-1" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fjuK2MNivoumrqlP2kkL-14" edge="1" parent="1" source="OG3XqojVWxAMTLAOR4AO-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="fjuK2MNivoumrqlP2kkL-13" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="73" y="200" />
+              <mxPoint x="73" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OG3XqojVWxAMTLAOR4AO-1" parent="1" style="html=1;whiteSpace=wrap;" value="Entrance Hall" vertex="1">
+          <mxGeometry height="120" width="110" x="110" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="OG3XqojVWxAMTLAOR4AO-2" parent="1" style="html=1;whiteSpace=wrap;" value="Great Hall" vertex="1">
+          <mxGeometry height="240" width="110" x="110" y="-150" as="geometry" />
+        </mxCell>
+        <mxCell id="OG3XqojVWxAMTLAOR4AO-4" parent="1" style="html=1;whiteSpace=wrap;" value="Paved Courtyard" vertex="1">
+          <mxGeometry height="120" width="145" x="-140" y="-60" as="geometry" />
+        </mxCell>
+        <mxCell id="OG3XqojVWxAMTLAOR4AO-6" parent="1" style="html=1;whiteSpace=wrap;" value="Stone bridge&lt;div&gt;[TO LIBRARY ANNEX]&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="220" x="310" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="fjuK2MNivoumrqlP2kkL-10" edge="1" parent="1" source="fjuK2MNivoumrqlP2kkL-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="fjuK2MNivoumrqlP2kkL-8" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fjuK2MNivoumrqlP2kkL-12" edge="1" parent="1" source="fjuK2MNivoumrqlP2kkL-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="fjuK2MNivoumrqlP2kkL-11" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fjuK2MNivoumrqlP2kkL-1" parent="1" style="html=1;whiteSpace=wrap;" value="Grounds" vertex="1">
+          <mxGeometry height="230" width="480" x="-75" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="fjuK2MNivoumrqlP2kkL-8" parent="1" style="html=1;whiteSpace=wrap;" value="Hagrid&#39;s Hut" vertex="1">
+          <mxGeometry height="100" width="100" x="460" y="365" as="geometry" />
+        </mxCell>
+        <mxCell id="fjuK2MNivoumrqlP2kkL-11" parent="1" style="html=1;whiteSpace=wrap;" value="Forbidden Forest" vertex="1">
+          <mxGeometry height="80" width="480" x="-75" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="fjuK2MNivoumrqlP2kkL-13" parent="1" style="html=1;whiteSpace=wrap;" value="Double Doors&lt;div&gt;[TO DUNGEONS]&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="125" x="-90" y="200" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

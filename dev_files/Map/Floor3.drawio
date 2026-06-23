@@ -1,0 +1,49 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="O7APK9uk1S1qte7LCbZh">
+    <mxGraphModel dx="637" dy="433" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bE3OanivdmfaZLxw3wwE-3" edge="1" parent="1" source="bE3OanivdmfaZLxw3wwE-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bE3OanivdmfaZLxw3wwE-2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bE3OanivdmfaZLxw3wwE-5" edge="1" parent="1" source="bE3OanivdmfaZLxw3wwE-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bE3OanivdmfaZLxw3wwE-4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bE3OanivdmfaZLxw3wwE-7" edge="1" parent="1" source="bE3OanivdmfaZLxw3wwE-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bE3OanivdmfaZLxw3wwE-6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G7vUIYiIXoaOOluMg4fJ-1" edge="1" parent="1" source="bE3OanivdmfaZLxw3wwE-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="bE3OanivdmfaZLxw3wwE-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bE3OanivdmfaZLxw3wwE-1" parent="1" style="html=1;whiteSpace=wrap;" value="Floor 3" vertex="1">
+          <mxGeometry height="80" width="80" x="284" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="bE3OanivdmfaZLxw3wwE-2" parent="1" style="html=1;whiteSpace=wrap;" value="Defense Against Dark Arts Classroom" vertex="1">
+          <mxGeometry height="80" width="144" x="252" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="bE3OanivdmfaZLxw3wwE-4" parent="1" style="html=1;whiteSpace=wrap;" value="Trophy Room" vertex="1">
+          <mxGeometry height="130" width="144" x="40" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="bE3OanivdmfaZLxw3wwE-9" edge="1" parent="1" source="bE3OanivdmfaZLxw3wwE-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="bE3OanivdmfaZLxw3wwE-8" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bE3OanivdmfaZLxw3wwE-6" parent="1" style="html=1;whiteSpace=wrap;" value="Trophy Room" vertex="1">
+          <mxGeometry height="50" width="134" x="410" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="bE3OanivdmfaZLxw3wwE-8" parent="1" style="html=1;whiteSpace=wrap;" value="Astronomy Tower" vertex="1">
+          <mxGeometry height="50" width="70" x="590" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="bE3OanivdmfaZLxw3wwE-10" parent="1" style="html=1;whiteSpace=wrap;" value="F3 Staircases" vertex="1">
+          <mxGeometry height="35" width="80" x="284" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="bE3OanivdmfaZLxw3wwE-11" parent="1" style="html=1;whiteSpace=wrap;" value="UP&lt;div&gt;[TO FLOOR 4]&lt;/div&gt;" vertex="1">
+          <mxGeometry height="35" width="80" x="240" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="bE3OanivdmfaZLxw3wwE-13" parent="1" style="html=1;whiteSpace=wrap;" value="DOWN&lt;div&gt;[TO FLOOR 2]&lt;/div&gt;" vertex="1">
+          <mxGeometry height="35" width="80" x="340" y="330" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

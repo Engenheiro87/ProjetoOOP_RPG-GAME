@@ -1,0 +1,37 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="S16R78UhFC96ggh32Fyb">
+    <mxGraphModel dx="637" dy="433" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="l1FV5qBoUMKj2KFlv0Oc-3" edge="1" parent="1" source="l1FV5qBoUMKj2KFlv0Oc-1" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" target="l1FV5qBoUMKj2KFlv0Oc-2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l1FV5qBoUMKj2KFlv0Oc-5" edge="1" parent="1" source="l1FV5qBoUMKj2KFlv0Oc-1" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" target="l1FV5qBoUMKj2KFlv0Oc-4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l1FV5qBoUMKj2KFlv0Oc-7" edge="1" parent="1" source="l1FV5qBoUMKj2KFlv0Oc-1" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" target="l1FV5qBoUMKj2KFlv0Oc-6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xDVYqpn7OD_6J7DOxSsN-7" edge="1" parent="1" source="l1FV5qBoUMKj2KFlv0Oc-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="xDVYqpn7OD_6J7DOxSsN-6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l1FV5qBoUMKj2KFlv0Oc-1" parent="1" style="html=1;whiteSpace=wrap;" value="Library Annex" vertex="1">
+          <mxGeometry height="80" width="110" x="304" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="l1FV5qBoUMKj2KFlv0Oc-2" parent="1" style="html=1;whiteSpace=wrap;" value="History of Magic Classroom" vertex="1">
+          <mxGeometry height="80" width="110" x="120" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="l1FV5qBoUMKj2KFlv0Oc-4" parent="1" style="html=1;whiteSpace=wrap;" value="Transfiguration Classroom" vertex="1">
+          <mxGeometry height="80" width="110" x="304" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="l1FV5qBoUMKj2KFlv0Oc-6" parent="1" style="html=1;whiteSpace=wrap;" value="Stone Bridge&lt;div&gt;[TO GROUND LEVEL]&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="110" x="470" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="xDVYqpn7OD_6J7DOxSsN-6" parent="1" style="html=1;whiteSpace=wrap;" value="Marble Staircase&lt;div&gt;[TO 2ND FLOOR]&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="110" x="304" y="360" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
