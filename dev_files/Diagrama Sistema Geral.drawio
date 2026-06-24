@@ -1,32 +1,35 @@
-<mxfile host="app.diagrams.net">
+<mxfile host="app.diagrams.net" pages="2">
   <diagram name="Página-1" id="uy0Weos3cvZKBoUvy9pD">
-    <mxGraphModel dx="3655" dy="2723" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2247" dy="1892" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <UserObject label="" mermaidData="{&#xa;  &quot;data&quot;: &quot;flowchart TD\n    %% Definindo os estilos\n    classDef inicioFim fill:#111,stroke:#fff,stroke-width:2px,color:#fff\n    classDef estado fill:#2B3A42,stroke:#fff,stroke-width:2px,color:#fff\n    classDef acao fill:#4A5D23,stroke:#fff,stroke-width:2px,color:#fff\n    classDef decisao fill:#DAA520,stroke:#fff,stroke-width:2px,color:#111\n\n    %% Textos envolvidos em aspas e sem parênteses para evitar erros de Parse\n    A([\&quot;Início do Jogo\&quot;]) --&gt; B[\&quot;Instanciar Game e Player\&quot;]\n    B --&gt; C[\&quot;Define o Detetive Harry\&quot;]\n    C --&gt; D[\&quot;Definir Sala inicial\&quot;]\n    \n    D --&gt; E{\&quot;LOOP DO JOGO\&quot;}\n    \n    E --&gt;|\&quot;Player.prompt\&quot;| F{\&quot;O que o jogador decide fazer?\&quot;}\n\n    %% Caminho de Movimentação\n    F --&gt;|\&quot;Explorar\&quot;| G[\&quot;Selecionar nova Location\&quot;]\n    G --&gt; H{\&quot;A sala esta conectada?\&quot;}\n    H --&gt;|\&quot;Sim\&quot;| I[\&quot;Atualiza current_location\&quot;]\n    H --&gt;|\&quot;Não\&quot;| J[\&quot;Aviso: Caminho bloqueado\&quot;]\n    I --&gt; E\n    J --&gt; E\n\n    %% Caminho de Investigação\n    F --&gt;|\&quot;Investigar\&quot;| K[\&quot;Buscar Evidence na Sala\&quot;]\n    K --&gt; L{\&quot;Nivel atende ao required?\&quot;}\n    L --&gt;|\&quot;Sim\&quot;| M[\&quot;Adiciona ao Inventario\&quot;]\n    L --&gt;|\&quot;Não\&quot;| N[\&quot;Aviso: Falta habilidade\&quot;]\n    M --&gt; O[\&quot;Evidence.read Revela pista\&quot;]\n    O --&gt; E\n    N --&gt; E\n\n    %% Caminho de Diálogo\n    F --&gt;|\&quot;Conversar\&quot;| P[\&quot;Selecionar NPC na Sala\&quot;]\n    P --&gt; Q[\&quot;NPC.talk Retorna dicas\&quot;]\n    Q --&gt; E\n\n    %% Caminho de Evolução / Dano\n    F --&gt;|\&quot;Treinar ou Dano\&quot;| R{\&quot;Evento da Sala\&quot;}\n    R --&gt;|\&quot;Ganhar XP\&quot;| S[\&quot;Ability.increment\&quot;]\n    R --&gt;|\&quot;Armadilha\&quot;| T[\&quot;Character.take_damage\&quot;]\n    \n    S --&gt; E\n    T --&gt; U{\&quot;Vida maior que zero?\&quot;}\n    U --&gt;|\&quot;Sim\&quot;| E\n    U --&gt;|\&quot;Não\&quot;| V([\&quot;Fim de Jogo: Derrota\&quot;])\n\n    %% Condição de Vitória\n    M --&gt; W{\&quot;Coletou todas as Evidencias?\&quot;}\n    W --&gt;|\&quot;Sim\&quot;| X([\&quot;Fim de Jogo: Misterio Resolvido\&quot;])\n    W --&gt;|\&quot;Não\&quot;| O\n\n    %% Aplicando os estilos separadamente\n    class A,V,X inicioFim\n    class E estado\n    class B,C,D,G,I,J,K,M,N,O,P,Q,S,T acao\n    class F,H,L,R,U,W decisao&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="gdxg5eg_WHAHM7AXgAJ6-1">
           <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=20;" vertex="1">
-            <mxGeometry as="geometry" />
+            <mxGeometry height="54" width="585" as="geometry" />
           </mxCell>
         </UserObject>
         <UserObject label="Início do Jogo" mermaidId="n:A" mermaidBaseStyle="html=1;rounded=1;whiteSpace=wrap;arcSize=50;strokeWidth=2;fillColor=#111;strokeColor=#fff;fontColor=#fff;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Início do Jogo" id="gdxg5eg_WHAHM7AXgAJ6-2">
           <mxCell parent="gdxg5eg_WHAHM7AXgAJ6-1" style="html=1;rounded=1;whiteSpace=wrap;arcSize=50;strokeWidth=2;fillColor=none;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="39" width="123" x="379" y="-120" as="geometry" />
+            <mxGeometry height="39" width="123" x="379.25" y="-310" as="geometry" />
           </mxCell>
         </UserObject>
+        <mxCell id="WUvD_dY0fryy0T47FJfN-2" edge="1" parent="gdxg5eg_WHAHM7AXgAJ6-1" source="gdxg5eg_WHAHM7AXgAJ6-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="WUvD_dY0fryy0T47FJfN-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <UserObject label="Instanciar Game e Player" mermaidId="n:B" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#4A5D23;strokeColor=#fff;fontColor=#fff;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Instanciar Game e Player" id="gdxg5eg_WHAHM7AXgAJ6-3">
           <mxCell parent="gdxg5eg_WHAHM7AXgAJ6-1" style="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#4A5D23;strokeColor=#fff;fontColor=#fff;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="54" width="240" x="321" y="-31" as="geometry" />
+            <mxGeometry height="54" width="240" x="321.25" y="-221" as="geometry" />
           </mxCell>
         </UserObject>
         <UserObject label="Define o Detetive Harry" mermaidId="n:C" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#4A5D23;strokeColor=#fff;fontColor=#fff;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Define o Detetive Harry" id="gdxg5eg_WHAHM7AXgAJ6-4">
           <mxCell parent="gdxg5eg_WHAHM7AXgAJ6-1" style="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#4A5D23;strokeColor=#fff;fontColor=#fff;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="54" width="230" x="326" y="73" as="geometry" />
+            <mxGeometry height="54" width="230" x="325" y="90" as="geometry" />
           </mxCell>
         </UserObject>
         <UserObject label="Definir Sala inicial" mermaidId="n:D" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#4A5D23;strokeColor=#fff;fontColor=#fff;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Definir Sala inicial" id="gdxg5eg_WHAHM7AXgAJ6-5">
           <mxCell parent="gdxg5eg_WHAHM7AXgAJ6-1" style="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#4A5D23;strokeColor=#fff;fontColor=#fff;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
-            <mxGeometry height="54" width="191" x="345" y="177" as="geometry" />
+            <mxGeometry height="54" width="191" x="345.5" y="190" as="geometry" />
           </mxCell>
         </UserObject>
         <UserObject label="LOOP DO JOGO" mermaidId="n:E" mermaidBaseStyle="rhombus;html=1;strokeWidth=2;whiteSpace=wrap;fillColor=#2B3A42;strokeColor=#fff;fontColor=#fff;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="LOOP DO JOGO" id="gdxg5eg_WHAHM7AXgAJ6-6">
@@ -124,20 +127,13 @@
             <mxGeometry height="342" width="342" x="1557" y="1927" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="Fim de Jogo: Misterio Resolvido" mermaidId="n:X" mermaidBaseStyle="html=1;rounded=1;whiteSpace=wrap;arcSize=50;strokeWidth=2;fillColor=#111;strokeColor=#fff;fontColor=#fff;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Fim de Jogo: Misterio Resolvido" id="gdxg5eg_WHAHM7AXgAJ6-25">
+        <UserObject label="Fim do Ato." mermaidId="n:X" mermaidBaseStyle="html=1;rounded=1;whiteSpace=wrap;arcSize=50;strokeWidth=2;fillColor=#111;strokeColor=#fff;fontColor=#fff;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Fim de Jogo: Misterio Resolvido" id="gdxg5eg_WHAHM7AXgAJ6-25">
           <mxCell parent="gdxg5eg_WHAHM7AXgAJ6-1" style="html=1;rounded=1;whiteSpace=wrap;arcSize=50;strokeWidth=2;fillColor=none;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
             <mxGeometry height="39" width="250" x="1314" y="2346" as="geometry" />
           </mxCell>
         </UserObject>
         <UserObject label="" mermaidId="e:A-&gt;B#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="" id="gdxg5eg_WHAHM7AXgAJ6-26">
           <mxCell edge="1" parent="gdxg5eg_WHAHM7AXgAJ6-1" source="gdxg5eg_WHAHM7AXgAJ6-2" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="gdxg5eg_WHAHM7AXgAJ6-3">
-            <mxGeometry relative="1" as="geometry">
-              <Array as="points" />
-            </mxGeometry>
-          </mxCell>
-        </UserObject>
-        <UserObject label="" mermaidId="e:B-&gt;C#0" mermaidBaseStyle="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;" mermaidBaseValue="" id="gdxg5eg_WHAHM7AXgAJ6-27">
-          <mxCell edge="1" parent="gdxg5eg_WHAHM7AXgAJ6-1" source="gdxg5eg_WHAHM7AXgAJ6-3" style="curved=1;startArrow=none;endArrow=block;endSize=7;strokeColor=light-dark(#333333,#cccccc);exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="gdxg5eg_WHAHM7AXgAJ6-4">
             <mxGeometry relative="1" as="geometry">
               <Array as="points" />
             </mxGeometry>
@@ -438,6 +434,30 @@
             </mxGeometry>
           </mxCell>
         </UserObject>
+        <UserObject label="Iniciar Ato" mermaidId="n:B" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#4A5D23;strokeColor=#fff;fontColor=#fff;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Instanciar Game e Player" id="WUvD_dY0fryy0T47FJfN-1">
+          <mxCell parent="gdxg5eg_WHAHM7AXgAJ6-1" style="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#4A5D23;strokeColor=#fff;fontColor=#fff;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="54" width="240" x="320.75" y="-124" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Carregar Locations e NPCs" mermaidId="n:B" mermaidBaseStyle="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#4A5D23;strokeColor=#fff;fontColor=#fff;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" mermaidBaseValue="Instanciar Game e Player" id="WUvD_dY0fryy0T47FJfN-4">
+          <mxCell parent="gdxg5eg_WHAHM7AXgAJ6-1" style="html=1;whiteSpace=wrap;strokeWidth=2;fillColor=#4A5D23;strokeColor=#fff;fontColor=#fff;fontFamily=Trebuchet MS,Verdana,Arial,sans-serif;fontSize=16;" vertex="1">
+            <mxGeometry height="54" width="240" x="325" y="-20" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="WUvD_dY0fryy0T47FJfN-5" edge="1" parent="gdxg5eg_WHAHM7AXgAJ6-1" source="WUvD_dY0fryy0T47FJfN-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.48;entryY=0.034;entryDx=0;entryDy=0;entryPerimeter=0;" target="WUvD_dY0fryy0T47FJfN-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WUvD_dY0fryy0T47FJfN-6" edge="1" parent="gdxg5eg_WHAHM7AXgAJ6-1" source="WUvD_dY0fryy0T47FJfN-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.525;entryY=0.02;entryDx=0;entryDy=0;entryPerimeter=0;" target="gdxg5eg_WHAHM7AXgAJ6-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="9EegyLGNwoJiffU8gyB_" name="Página-2">
+    <mxGraphModel dx="852" dy="434" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
       </root>
     </mxGraphModel>
   </diagram>

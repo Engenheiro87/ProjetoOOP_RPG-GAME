@@ -1,0 +1,43 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="szChwralPG0riJ6WijaB" name="Página-1">
+    <mxGraphModel dx="637" dy="433" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="JdU8jMvEREzWZ2LSFzoO-10" edge="1" parent="1" source="JdU8jMvEREzWZ2LSFzoO-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="JdU8jMvEREzWZ2LSFzoO-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="JdU8jMvEREzWZ2LSFzoO-13" edge="1" parent="1" source="JdU8jMvEREzWZ2LSFzoO-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="JdU8jMvEREzWZ2LSFzoO-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="JdU8jMvEREzWZ2LSFzoO-1" parent="1" style="html=1;whiteSpace=wrap;" value="Floor 2" vertex="1">
+          <mxGeometry height="80" width="80" x="430" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="JdU8jMvEREzWZ2LSFzoO-2" parent="1" style="html=1;whiteSpace=wrap;" value="F2 Staircases" vertex="1">
+          <mxGeometry height="40" width="80" x="430" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="JdU8jMvEREzWZ2LSFzoO-3" parent="1" style="html=1;whiteSpace=wrap;" value="DOWN&lt;br&gt;&lt;div&gt;[TO FLOOR 1]&lt;/div&gt;" vertex="1">
+          <mxGeometry height="40" width="80" x="480" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="JdU8jMvEREzWZ2LSFzoO-4" parent="1" style="html=1;whiteSpace=wrap;" value="UP&lt;div&gt;[TO FLOOR 3]&lt;/div&gt;" vertex="1">
+          <mxGeometry height="40" width="80" x="380" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="JdU8jMvEREzWZ2LSFzoO-9" edge="1" parent="1" source="JdU8jMvEREzWZ2LSFzoO-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="JdU8jMvEREzWZ2LSFzoO-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="JdU8jMvEREzWZ2LSFzoO-8" parent="1" style="html=1;whiteSpace=wrap;" value="Spell Classroom" vertex="1">
+          <mxGeometry height="80" width="80" x="430" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="JdU8jMvEREzWZ2LSFzoO-15" edge="1" parent="1" source="JdU8jMvEREzWZ2LSFzoO-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" target="JdU8jMvEREzWZ2LSFzoO-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="JdU8jMvEREzWZ2LSFzoO-12" parent="1" style="html=1;whiteSpace=wrap;" value="Moaning Myrtle&#39;s bathroom" vertex="1">
+          <mxGeometry height="80" width="80" x="290" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="JdU8jMvEREzWZ2LSFzoO-14" parent="1" style="html=1;whiteSpace=wrap;" value="Entrance to the Chamber of Secrets" vertex="1">
+          <mxGeometry height="80" width="60" x="150" y="750" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

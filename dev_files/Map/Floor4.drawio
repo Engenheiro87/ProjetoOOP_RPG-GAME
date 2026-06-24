@@ -1,0 +1,25 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="orlHgO7xeiU0pcsaBMy7">
+    <mxGraphModel dx="554" dy="422" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="5jX8qBoYS-zPP8jo4FpL-5" edge="1" parent="1" source="5jX8qBoYS-zPP8jo4FpL-1" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" target="5jX8qBoYS-zPP8jo4FpL-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5jX8qBoYS-zPP8jo4FpL-1" parent="1" style="html=1;whiteSpace=wrap;" value="Floor 4" vertex="1">
+          <mxGeometry height="67" width="73" x="262" y="176" as="geometry" />
+        </mxCell>
+        <mxCell id="5jX8qBoYS-zPP8jo4FpL-2" parent="1" style="html=1;whiteSpace=wrap;" value="F4 staircases" vertex="1">
+          <mxGeometry height="34" width="73" x="262" y="268" as="geometry" />
+        </mxCell>
+        <mxCell id="5jX8qBoYS-zPP8jo4FpL-3" parent="1" style="html=1;whiteSpace=wrap;" value="DOWN&lt;div&gt;[TO FLOOR 3]&lt;/div&gt;" vertex="1">
+          <mxGeometry height="32" width="95" x="317" y="322" as="geometry" />
+        </mxCell>
+        <mxCell id="5jX8qBoYS-zPP8jo4FpL-4" parent="1" style="html=1;whiteSpace=wrap;" value="UP&lt;div&gt;[TO FLOOR 5]&lt;/div&gt;" vertex="1">
+          <mxGeometry height="32" width="95" x="186" y="322" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
