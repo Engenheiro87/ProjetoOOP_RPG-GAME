@@ -1,0 +1,8 @@
+{
+    "display_name":"Grounds",
+    "furniture":[],
+    "npcs":{},
+    "connections":[
+        "entrance"
+    ]   
+}

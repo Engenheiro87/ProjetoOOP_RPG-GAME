@@ -1,0 +1,13 @@
+{
+    "display_name":"Entrance Hall",
+    "description":"entrance hall description...",
+    "furniture":[],
+    "npcs":{},
+    "connections":[
+        "great_hall",
+        "paved_courtyard",
+        "stone_bridge",
+        "dungeons",
+        "grounds"
+    ]
+}
