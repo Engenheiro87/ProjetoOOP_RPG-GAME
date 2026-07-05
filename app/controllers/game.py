@@ -22,6 +22,18 @@ class Game:
         self.__game_state = "N/A";
         self.start();
 
+    ##############################################################
+    # attributes (for bash testing)
+    @property
+    def player(self):
+        return self.__player;
+
+    @property
+    def act(self):
+        return self.__current_act;
+    ##############################################################
+    
+    #methods
     def start(self):
         print("starting game.");
         self.reload_character();

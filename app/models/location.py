@@ -11,17 +11,19 @@ class Location:
         self.__description:str = data.get("description");
         self.__required_key:str|None = data.get("key", None);
         self.__blocked = data.get("blocked", False);
-        print(f"loaded location with data = {data}");
     
     @property
     def name(self):
         return self.__name;
 
+    @property
+    def connections(self):
+        return self.__connections;
+
     def is_connected_to(self, location:Location)->bool:
         return location!= self and location in self.__connections;
 
     def connect_to(self, location:Location):
-        print(f"asking to connect with {location.name}");
         if not self.is_connected_to(location):
             self.__connections.append(location);
 

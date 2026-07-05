@@ -71,13 +71,8 @@ class StaticData(DataRecord):
         super().__init__(file_path);
 
     def read_fallback(self):
-        print(f"data = {self.data}");
         raise FileNotFoundError(f"Could not find static file \"{self.file_path}\"");
 
     def clone_data(self, str)->any:
         original_data = self.read_data(str);
         return deepcopy(original_data);
-
-if __name__ == "__main__":
-    castle_layout = StaticData("castle_layout.json");
-    print(castle_layout.read_data("harry"));
