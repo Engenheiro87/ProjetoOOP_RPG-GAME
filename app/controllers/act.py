@@ -56,16 +56,21 @@ class Act:
         target:Location = self.__loaded_locations.get(loc_name);
         if not target:
             return False, "Location does not exist.";
-        target_name = target.name;
+    
         current_location = self.__current_location;
         if current_location.is_connected_to(target):
             self.__current_location = target;
-            print(f"moved to {target_name}\nNext moves:");
-            for connected in self.__current_location.connections:
-                print(f"MOVE TO - \"{connected.name}\"");
-            return True, f"Moved to {target_name}";
+            return True, {
+                "options":
+                {
+                    location.name:loc_name 
+                    for loc_name, location in self.__loaded_locations.items()
+                    if target.is_connected_to(location)
+                },
+                "description":target.description
+            }; # retorna True (sucesso) e as próximas opções no formato NOME FANTASIA : ID.
         else:
-            return False, f"{target_name} isn't connected to {current_location.name}";
+            return False, f"not_connected";
 
     def inspect(self, furniture_name:str)->dict:
         pass;

@@ -20,6 +20,10 @@ class Location:
     def connections(self):
         return self.__connections;
 
+    @property
+    def description(self):
+        return self.__description;
+
     def is_connected_to(self, location:Location)->bool:
         return location!= self and location in self.__connections;
 
