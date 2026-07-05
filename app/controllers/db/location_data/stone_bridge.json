@@ -1,0 +1,8 @@
+{
+    "display_name":"Stone Bridge",
+    "furniture":[],
+    "npcs":{},
+    "connections":[
+        "entrance"
+    ]   
+}
