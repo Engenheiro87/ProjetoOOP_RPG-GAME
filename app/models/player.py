@@ -9,6 +9,10 @@ class Player:
     @property
     def id(self):
         return self.__id;
+
+    @property
+    def character(self):
+        return self.__character;
     
     def set_character(self, character:PlayerCharacter):
         print(f"New character being set for player \"{self.id}\" = {character}");

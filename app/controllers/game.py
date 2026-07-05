@@ -13,11 +13,12 @@ class Game:
             "game_data" : DynamicData("game.json"),
             "game_default":StaticData("game_default.json"),
             "player_data": DynamicData("player.json", self.__player.pack),
-            "character_data" : StaticData("characters.json"),
         };
         self.__act_dependencies = {
             "get_game_def":lambda: self.__data["game_default"],
             "get_loc_data":self.get_location_data,
+            "get_char_data":self.get_char_data,
+            "get_player_evidence":self.get_player_evidence,
         };
         self.__game_state = "N/A";
         self.start();
@@ -99,3 +100,14 @@ class Game:
         return StaticData(
             f"location_data/{location_name}.json"
         ).data;
+
+    def get_char_data(self, char_id:str)->dict:
+        return StaticData(
+            f"character_data/{char_id}.json"
+        ).data;
+
+    def get_player_evidence(self, evidence_name:str)->Evidence:
+        if not self.__player:
+            raise Exception("Attempt to perform a 'player_has_evidence' check without a player instantiated.");
+        return self.__player.character.get_evidence(evidence_name);
+

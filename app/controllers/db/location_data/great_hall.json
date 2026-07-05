@@ -4,5 +4,6 @@
     "npcs":{},
     "connections":[
         "entrance"
-    ]   
+    ],
+    "key":"Old Rusty Key"
 }

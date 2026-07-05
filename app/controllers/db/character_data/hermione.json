@@ -1,0 +1,8 @@
+{
+    "name":"Hermione",
+    "role":"friend",
+    "stats":{
+        "intelligence":10,
+        "power":4
+    }
+}

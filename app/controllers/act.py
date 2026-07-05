@@ -27,13 +27,20 @@ class Act:
 
     def load(self):
         self.__loaded_locations = {
-            loc_name:Location(self.__dependencies['get_loc_data'](loc_name))
+            loc_name:self.load_location(loc_name)
             for loc_name in self.__dependencies['get_game_def']().read_data('locations')
         };
         self.__load_connections();
         self.__current_location = self.__loaded_locations[self.__default_data.read_data("starting_location")];
         print(f"Set current location as {self.__current_location.name}");
-        
+    
+    def load_location(self, loc_id:str)->Location:
+        loc_data = self.__dependencies['get_loc_data'](loc_id);
+        npc_data = {
+            char_name:self.__dependencies['get_char_data'](char_name)
+            for char_name in loc_data['npcs']
+        };
+        return Location(loc_data, npc_data);
 
     def __load_connections(self):
         for loc_name, location in self.__loaded_locations.items():
@@ -52,11 +59,18 @@ class Act:
     def talk_to_npc(self, name:str)->dict:
         pass;
 
-    def travel_to(self, loc_name:str)->tuple[bool, str]:
+    def travel_to(self, loc_name:str)->tuple[bool, str|dict]:
         target:Location = self.__loaded_locations.get(loc_name);
         if not target:
             return False, "Location does not exist.";
-    
+        if target.blocked:
+            return False, "blocked";
+        elif target.required_key:
+            key = target.required_key;
+            if not self.__dependencies['get_player_evidence'](key):
+                return False, {
+                    "required_key":key
+                };
         current_location = self.__current_location;
         if current_location.is_connected_to(target):
             self.__current_location = target;
