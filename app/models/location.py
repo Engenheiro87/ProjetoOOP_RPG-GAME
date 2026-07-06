@@ -44,18 +44,17 @@ class Location:
             self.__connections.append(location);
 
     def move_character_to(self, character:NPC):
-        if not character in self.__npcs:
-            self.__npcs.append(character);
+        if not character in self.__npcs.values():
+            self.__npcs[character.id] = character;
     
-    def get_character(self, char_name:str)->NPC|None:
-        for character in self.__npcs:
-            if character.name == char_name:
-                return character;
+    def get_character(self, id:str)->NPC|None:
+        return self.__npcs.get(id);
 
     def move_character_from(self, character:NPC):
-        if character in self.__npcs:
-            self.__npcs.remove(character);
-
+        char_id = character.id;
+        if self.__npcs.get(char_id):
+            self.__npcs.pop(char_id);
+    
     def get_furniture(self, furniture_name:str)->Furniture|None:
         for furniture in self.__furnitures:
             if furniture.name == furniture_name:

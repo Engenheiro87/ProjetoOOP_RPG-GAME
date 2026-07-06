@@ -1,5 +1,6 @@
 {
     "name":"Hermione",
+    "id":"hermione",
     "role":"friend",
     "stats":{
         "intelligence":10,

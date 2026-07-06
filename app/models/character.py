@@ -50,18 +50,23 @@ class NPC(Character):
         "friend":0,
         "enemy": 1,
     }
-    def __init__(self, name:str, role:str, stats:dict={}):
+    def __init__(self, name:str, id:str, role:str, stats:dict={}):
         super().__init__(
             name, 
             stats.get('health', 18), 
             stats.get('power', 3), 
             stats.get('evidences', [])
         );
+        self.__id = id;
         self.__role = role or "neutral";
 
     @property
     def role(self)->str:
         return self.__role;
+
+    @property
+    def id(self)->str:
+        return self.__id;
 
 class PlayerCharacter(Character):
     def __init__(self, name:str, stats:dict, abilities:list=None):

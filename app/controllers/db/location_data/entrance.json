@@ -2,7 +2,6 @@
     "display_name":"Entrance Hall",
     "description":"entrance hall description...",
     "furniture":[],
-    "npcs":["hermione"],
     "connections":[
         "great_hall",
         "paved_courtyard",

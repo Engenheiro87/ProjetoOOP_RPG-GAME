@@ -129,11 +129,12 @@ class Game:
             raise Exception("Attempt to perform a 'player_has_evidence' check without a player instantiated.");
         return self.__player.character.get_evidence(evidence_name);
 
-    def play_cutscene(self, script:dict):
+    def play_cutscene(self, script:list):
         game_default:StaticData = self.__data["game_default"];
         char_tags:dict = game_default.read_data("char_tags");
         for line in script:
-            line:str = line;
+            if not "/" in line:
+                return print(f"No \"/\" in line to separate char_name/line\nLINE=  {line}");
             tag, line = line.strip().split("/");
             print(f"{char_tags.get(tag, "???")}: {line}")
             input();

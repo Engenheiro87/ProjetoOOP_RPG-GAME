@@ -1,7 +1,6 @@
 {
     "display_name":"The Great Hall",
     "furniture":[],
-    "npcs":{},
     "connections":[
         "entrance"
     ],
