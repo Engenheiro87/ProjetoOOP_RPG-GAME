@@ -43,7 +43,7 @@ class Character:
             return evidence;
 
     def is_dead(self)->bool:
-        return self.__health<3;
+        return self.__health<=3;
 
 class NPC(Character):
     roles = {

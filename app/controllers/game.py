@@ -19,6 +19,7 @@ class Game:
             "get_loc_data":self.get_location_data,
             "get_char_data":self.get_char_data,
             "get_player_evidence":self.get_player_evidence,
+            "play_cutscene":self.play_cutscene,
         };
         self.__game_state = "N/A";
         self.start();
@@ -40,6 +41,9 @@ class Game:
         self.reload_character();
         return self;
 
+    def increase_ability(self, name:str, increment:float):
+        pass;
+
     def destroy(self):
         for dt_name, data in self.__data.items():
             if type(data) == DynamicData:
@@ -54,6 +58,7 @@ class Game:
         if data_type!=StaticData and data_type!=DynamicData:
             return;
         self.__data[data_name] = data;
+    
 
     def save_act_data(self, act_number:int, act_data:dict):
         game_data:DynamicData = self.read_game_data("game_data");
@@ -95,6 +100,19 @@ class Game:
             [Ability(data['name'], data['level']) for data in player_data.read_data("abilities", default=[])]
         );
         self.__player.set_character(new_character);
+    
+    def damage_player(self, damage:int):
+        if not self.__player:
+            raise Exception("No player instantiated to be damaged.");
+        if self.__player.character.is_dead():
+            print("player is already dead.");
+            return;
+        self.__player.character.take_damage(damage);
+        if self.__player.character.is_dead():
+            print("player died.");
+    
+    def prompt_player(self, data:dict):
+        pass;
 
     def get_location_data(self, location_name:str)->dict:
         return StaticData(
@@ -110,4 +128,13 @@ class Game:
         if not self.__player:
             raise Exception("Attempt to perform a 'player_has_evidence' check without a player instantiated.");
         return self.__player.character.get_evidence(evidence_name);
+
+    def play_cutscene(self, script:dict):
+        game_default:StaticData = self.__data["game_default"];
+        char_tags:dict = game_default.read_data("char_tags");
+        for line in script:
+            line:str = line;
+            tag, line = line.strip().split("/");
+            print(f"{char_tags.get(tag, "???")}: {line}")
+            input();
 

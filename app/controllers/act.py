@@ -13,7 +13,7 @@ class Act:
     __current_location:Location|None = field(init=False, default_factory=lambda: None);
     __missions:list = field(init=False, default_factory=list);
     __flags:dict = field(init=False, default_factory=dict);
-    __current_layer:int = field(init=False, default_factory=lambda:0);
+    __current_layer:int = field(init=False, default_factory=lambda:-1);
 
     #############################################
     # attributes for bash testing
@@ -52,6 +52,7 @@ class Act:
 
     def start(self, layer:int=0):
         self.load();
+        self.progress_story();
 
     def destroy(self):
         print("asked to destroy act.");
@@ -95,8 +96,14 @@ class Act:
     def on_event(self, action:str, params:dict):
         pass;
 
-    def progress_story(self):
-        pass;
+    def progress_story(self, increment:int=1):
+        self.__current_layer+=increment;
+        layer_now = self.__current_layer;
+
+        layer_data = self.__default_data.read_data("layers")[layer_now];
+        cutscene = layer_data.get("cutscene");
+        if cutscene:
+            self.__dependencies["play_cutscene"](cutscene);
 
     def get_flag(self, flag_name:str):
         return self.__flags.get(flag_name);

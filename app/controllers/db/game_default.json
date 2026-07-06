@@ -6,5 +6,15 @@
         "dungeons",
         "stone_bridge",
         "grounds"
-    ]
+    ],
+
+    "char_tags":{
+        "nar":"Narrator",
+        "har":"Harry",
+        "her":"Hermione",
+        "ron":"Ronny",
+        "dum":"Dumbledore",
+        "hag":"Hagrid",
+        "str":"???"
+    }
 }

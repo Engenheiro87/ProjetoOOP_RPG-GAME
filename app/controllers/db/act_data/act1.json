@@ -1,4 +1,12 @@
 {
     "display_name":"Act 1 - A new mystery",
-    "starting_location":"entrance"
+    "starting_location":"entrance",
+    "layers":[
+        {
+            "cutscene":[
+                "nar/It was a rainy night, Harry Potter was sleeping...",
+                "nar/Until a particularly loud thunder woke him up."
+            ]
+        }
+    ]
 }
