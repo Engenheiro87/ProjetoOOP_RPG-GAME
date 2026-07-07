@@ -12,8 +12,15 @@
         
     ],
 
-    "npcs":{
-        "entrance":["hermione"]
+    "locations":{
+        
+        "entrance":{
+            "npcs": ["hermione"],
+            "evidences":{
+                "wooden-desk": ["rusty-key"]
+            }
+        }
+
     },
 
     "characters":{

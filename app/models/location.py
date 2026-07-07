@@ -1,11 +1,28 @@
 from dataclasses import dataclass, field;
 from app.models.furniture import Furniture;
 from app.models.character import NPC
+from app.models.evidence import Evidence;
 
 class Location:
-    def __init__(self, location_data:dict, npc_data:dict={}):
+    def __init__(self, location_data:dict, npc_data:dict={}, furniture_data:dict={}):
         self.__name:str = location_data['display_name'];
-        self.__furnitures:list[Furniture] = [Furniture(data) for data in location_data['furniture']];
+        self.__furnitures:list[Furniture] = {
+            furniture_name:Furniture(
+                fur_data['default_data']["display_name"],
+                [ # list of evidences
+                    Evidence(
+                        evidence_data['display_name'],
+                        evidence_data.get("required_ability"),
+                        evidence_data.get("required_level")
+                    )
+                    for evidence_name, evidence_data in fur_data['evidence_data'].items()
+                ],
+                fur_data['default_data'].get('damages', False)
+                #missing blocked location
+            )
+            for furniture_name, fur_data in furniture_data.items()
+        };
+        # self.__furnitures:list[Furniture] = [Furniture(data) for data in location_data['furniture']];
         self.__npcs:dict[str:NPC] = {npc_name:NPC(**ndata) for npc_name, ndata in npc_data.items()};
         self.__connections:list[Location] = [];
         self.__description:str = location_data.get("description");
@@ -36,6 +53,10 @@ class Location:
     def required_key(self):
         return self.__required_key;
 
+    @property
+    def furnitures(self):
+        return self.__furnitures;
+
     def is_connected_to(self, location:Location)->bool:
         return location!= self and location in self.__connections;
 
@@ -56,6 +77,4 @@ class Location:
             self.__npcs.pop(char_id);
     
     def get_furniture(self, furniture_name:str)->Furniture|None:
-        for furniture in self.__furnitures:
-            if furniture.name == furniture_name:
-                return furniture;
+        return self.__furnitures.get(furniture_name);

@@ -1,7 +1,7 @@
 {
     "display_name":"Entrance Hall",
     "description":"entrance hall description...",
-    "furniture":[],
+    "furniture":["wooden-desk"],
     "connections":[
         "great_hall",
         "paved_courtyard",

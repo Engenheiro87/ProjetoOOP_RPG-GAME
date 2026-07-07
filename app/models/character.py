@@ -83,5 +83,15 @@ class PlayerCharacter(Character):
             if ability.name == name:
                 return ability;
 
+    def pack(self)->dict:
+        return {
+            "health":self.health,
+            "power":self.power,
+            "evidences":[evidence.pack() for evidence in self.evidences],
+            "intelligence":self.intelligence,
+            "abilities":[ability.pack() for ability in self.__abilities]
+        };
+        
+
 
 

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field;
 from app.models.location import Location;
+from app.models.furniture import Furniture;
 from app.controllers.data_record import StaticData;
 from app.models.character import NPC;
 
@@ -40,14 +41,33 @@ class Act:
         print(f"Set current location as {self.__current_location.name}");
     
     def load_location(self, loc_id:str)->Location:
+        # location data
         loc_data = self.__dependencies['get_loc_data'](loc_id);
-        act_npc_data = self.__default_data.read_data("npcs");
-        location_npc_list = act_npc_data.get(loc_id) or [];
+        act_location_data = self.__default_data.read_data("locations").get(loc_id, {});
+
+        # npc data
+        location_npc_list = act_location_data.get("npcs", []);
         npc_data = {
             char_name:self.__dependencies['get_char_data'](char_name)
             for char_name in location_npc_list
         };
-        return Location(loc_data, npc_data);
+
+        # furniture data
+        default_location_furniture = loc_data['furniture']; # list de nomes de móveis apenas DO LOCAL
+        location_evidence_dict = act_location_data.get("evidences", {}); # dicionário furniture-id : [evidence_id]
+        default_furniture_data:dict = self.__dependencies["get_game_def"]().read_data("furniture"); # dicionário furniture-id : {default furniture data}
+        furniture_data = {
+            name:{ # <- furniture data
+                "default_data":default_furniture_data.get(name), # <- furniture data still
+                "evidence_data":{ # <- evidences data
+                    evidence_name:self.__dependencies["get_evidence_data"](evidence_name)
+                    for evidence_name in location_evidence_dict.get(name, [])
+                }
+            }
+            for name in default_location_furniture # name = wooden-desk
+        };
+
+        return Location(loc_data, npc_data, furniture_data);
 
     def __load_connections(self):
         for loc_name, location in self.__loaded_locations.items():
@@ -114,8 +134,13 @@ class Act:
         else:
             return False, f"not_connected";
 
-    def inspect(self, furniture_name:str)->dict:
-        pass;
+    def inspect(self, furniture_name:str)->tuple[bool, str]|dict:
+        furniture = self.__current_location.get_furniture(furniture_name);
+        if not furniture:
+            return False, "not found";
+        stats = self.__dependencies["get_player_stats"]();
+        result = furniture.inspect(stats);
+        return result;
 
     def grab_evidence(self, furniture_name:str, evidence_name:str)->dict:
         pass;

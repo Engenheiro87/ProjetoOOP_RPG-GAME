@@ -18,3 +18,9 @@ class Ability:
 
     def activate(self)->dict:
         pass;
+
+    def pack(self)->dict:
+        return {
+            "name":self.__name,
+            "level":self.__level
+        }

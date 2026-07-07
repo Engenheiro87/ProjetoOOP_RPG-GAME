@@ -12,6 +12,7 @@ class Game:
         self.__data = {
             "game_data" : DynamicData("game.json"),
             "game_default":StaticData("game_default.json"),
+            "evidence_default":StaticData("evidence_default.json"),
             "player_data": DynamicData("player.json", self.__player.pack),
         };
         self.__act_dependencies = {
@@ -19,7 +20,9 @@ class Game:
             "get_loc_data":self.get_location_data,
             "get_char_data":self.get_char_data,
             "get_player_evidence":self.get_player_evidence,
+            "get_player_stats":self.get_player_stats,
             "play_cutscene":self.play_cutscene,
+            "get_evidence_data":self.get_evidence_data,
         };
         self.__game_state = "N/A";
         self.start();
@@ -139,3 +142,8 @@ class Game:
             print(f"{char_tags.get(tag, "???")}: {line}")
             input();
 
+    def get_player_stats(self)->dict:
+        return self.__player.character.pack();
+
+    def get_evidence_data(self, evidence_name:str)->dict:
+        return self.__data["evidence_default"].read_data(evidence_name);

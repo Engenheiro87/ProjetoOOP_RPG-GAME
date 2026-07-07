@@ -45,7 +45,7 @@ class DataRecord(ABC):
         if function:
             return function(self.__data[index]);
         try:
-            return self.__data[index]
+            return deepcopy(self.__data[index]);
         except:
             return None;
 
