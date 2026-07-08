@@ -25,6 +25,7 @@ class Game:
             "get_evidence_data":self.get_evidence_data,
         };
         self.__game_state = "N/A";
+        self.__pending_cutscene = None;
         self.start();
 
     ##############################################################
@@ -36,11 +37,17 @@ class Game:
     @property
     def act(self):
         return self.__current_act;
+
+    @property
+    def state(self)->str:
+        return self.__game_state;
+
     ##############################################################
     
     #methods
     def start(self):
         print("starting game.");
+
         self.reload_character();
         return self;
 
@@ -132,15 +139,19 @@ class Game:
             raise Exception("Attempt to perform a 'player_has_evidence' check without a player instantiated.");
         return self.__player.character.get_evidence(evidence_name);
 
-    def play_cutscene(self, script:list):
+    def play_cutscene(self, script:list)->list[str]:
         game_default:StaticData = self.__data["game_default"];
         char_tags:dict = game_default.read_data("char_tags");
-        for line in script:
-            if not "/" in line:
-                return print(f"No \"/\" in line to separate char_name/line\nLINE=  {line}");
+
+        def parse_line(line:str)->str:
             tag, line = line.strip().split("/");
-            print(f"{char_tags.get(tag, "???")}: {line}")
-            input();
+            return f"{char_tags.get(tag, "???")}: {line}";
+
+        parsed = [
+                parse_line(line)
+                for line in script
+        ];
+        return parsed;
 
     def get_player_stats(self)->dict:
         return self.__player.character.pack();
