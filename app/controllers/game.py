@@ -12,14 +12,20 @@ class Game:
         self.__data = {
             "game_data" : DynamicData("game.json"),
             "game_default":StaticData("game_default.json"),
+            "evidence_default":StaticData("evidence_default.json"),
             "player_data": DynamicData("player.json", self.__player.pack),
-            "character_data" : StaticData("characters.json"),
         };
         self.__act_dependencies = {
             "get_game_def":lambda: self.__data["game_default"],
             "get_loc_data":self.get_location_data,
+            "get_char_data":self.get_char_data,
+            "get_player_evidence":self.get_player_evidence,
+            "get_player_stats":self.get_player_stats,
+            "play_cutscene":self.play_cutscene,
+            "get_evidence_data":self.get_evidence_data,
         };
         self.__game_state = "N/A";
+        self.__pending_cutscene = None;
         self.start();
 
     ##############################################################
@@ -31,13 +37,22 @@ class Game:
     @property
     def act(self):
         return self.__current_act;
+
+    @property
+    def state(self)->str:
+        return self.__game_state;
+
     ##############################################################
     
     #methods
     def start(self):
         print("starting game.");
+
         self.reload_character();
         return self;
+
+    def increase_ability(self, name:str, increment:float):
+        pass;
 
     def destroy(self):
         for dt_name, data in self.__data.items():
@@ -53,6 +68,7 @@ class Game:
         if data_type!=StaticData and data_type!=DynamicData:
             return;
         self.__data[data_name] = data;
+    
 
     def save_act_data(self, act_number:int, act_data:dict):
         game_data:DynamicData = self.read_game_data("game_data");
@@ -94,8 +110,51 @@ class Game:
             [Ability(data['name'], data['level']) for data in player_data.read_data("abilities", default=[])]
         );
         self.__player.set_character(new_character);
+    
+    def damage_player(self, damage:int):
+        if not self.__player:
+            raise Exception("No player instantiated to be damaged.");
+        if self.__player.character.is_dead():
+            print("player is already dead.");
+            return;
+        self.__player.character.take_damage(damage);
+        if self.__player.character.is_dead():
+            print("player died.");
+    
+    def prompt_player(self, data:dict):
+        pass;
 
     def get_location_data(self, location_name:str)->dict:
         return StaticData(
             f"location_data/{location_name}.json"
         ).data;
+
+    def get_char_data(self, char_id:str)->dict:
+        return StaticData(
+            f"character_data/{char_id}.json"
+        ).data;
+
+    def get_player_evidence(self, evidence_name:str)->Evidence:
+        if not self.__player:
+            raise Exception("Attempt to perform a 'player_has_evidence' check without a player instantiated.");
+        return self.__player.character.get_evidence(evidence_name);
+
+    def play_cutscene(self, script:list)->list[str]:
+        game_default:StaticData = self.__data["game_default"];
+        char_tags:dict = game_default.read_data("char_tags");
+
+        def parse_line(line:str)->str:
+            tag, line = line.strip().split("/");
+            return f"{char_tags.get(tag, "???")}: {line}";
+
+        parsed = [
+                parse_line(line)
+                for line in script
+        ];
+        return parsed;
+
+    def get_player_stats(self)->dict:
+        return self.__player.character.pack();
+
+    def get_evidence_data(self, evidence_name:str)->dict:
+        return self.__data["evidence_default"].read_data(evidence_name);

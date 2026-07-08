@@ -1,8 +1,8 @@
 {
     "display_name":"The Great Hall",
     "furniture":[],
-    "npcs":{},
     "connections":[
         "entrance"
-    ]   
+    ],
+    "key":"Old Rusty Key"
 }

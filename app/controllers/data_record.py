@@ -9,16 +9,16 @@ class DataRecord(ABC):
     root = "app/controllers/db/";
     def __init__(self, file_path:str):
         self.__file_path:str = DataRecord.root+file_path;
-        self.__data:dict = None;
+        self.__data:dict|list = None;
         self.__read();
     
     @property
-    def data(self):
+    def data(self)->dict|list:
         return self.__data;
 
     @data.setter
     def data(self, new_value):
-        if type(new_value)!=dict:
+        if type(new_value)!=dict and type(new_value)!=list:
             return;
         self.__data = new_value;
 
@@ -44,7 +44,10 @@ class DataRecord(ABC):
             return default;
         if function:
             return function(self.__data[index]);
-        return self.__data[index];
+        try:
+            return deepcopy(self.__data[index]);
+        except:
+            return None;
 
 class DynamicData(DataRecord):
     def __init__(self, file_path:str, packing_function=None):

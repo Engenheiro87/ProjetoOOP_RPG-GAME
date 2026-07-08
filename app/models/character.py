@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field;
+from app.models.evidence import Evidence;
 
 @dataclass
 class Character:
     __name:str;
-    __health:int = field(repr=False, default_factory=lambda: 18);
-    __power:int = field(repr=False, default_factory=lambda: 3);
-    __evidences:list = field(repr=False, default_factory=list);
+    __health:int; # 18
+    __power:int; # 3
+    __evidences:list; # list
 
     @property
     def evidences(self):
@@ -25,12 +26,12 @@ class Character:
 
     def take_damage(self, damage:int):
         if self.__health>3:
-            self.__health -= damage;
+            self.__health = max(self.__health-damage, 3);
     
-    def get_evidence(self, name:str):
+    def get_evidence(self, name:str)->Evidence:
         for evidence in self.__evidences:
             if evidence.name == name:
-                return;
+                return evidence;
 
     def take_evidence(self, evidence):
         if not evidence in self.__evidences:
@@ -42,16 +43,30 @@ class Character:
             return evidence;
 
     def is_dead(self)->bool:
-        return self.__health<3;
+        return self.__health<=3;
 
 class NPC(Character):
-    def __init__(self, name:str, role:str, stats:dict):
-        super().__init__(name, stats['health'], stats['power'], stats['evidences']);
+    roles = {
+        "friend":0,
+        "enemy": 1,
+    }
+    def __init__(self, name:str, id:str, role:str, stats:dict={}):
+        super().__init__(
+            name, 
+            stats.get('health', 18), 
+            stats.get('power', 3), 
+            stats.get('evidences', [])
+        );
+        self.__id = id;
         self.__role = role or "neutral";
 
     @property
     def role(self)->str:
         return self.__role;
+
+    @property
+    def id(self)->str:
+        return self.__id;
 
 class PlayerCharacter(Character):
     def __init__(self, name:str, stats:dict, abilities:list=None):
@@ -67,6 +82,16 @@ class PlayerCharacter(Character):
         for ability in self.__abilities:
             if ability.name == name:
                 return ability;
+
+    def pack(self)->dict:
+        return {
+            "health":self.health,
+            "power":self.power,
+            "evidences":[evidence.pack() for evidence in self.evidences],
+            "intelligence":self.intelligence,
+            "abilities":[ability.pack() for ability in self.__abilities]
+        };
+        
 
 
 
