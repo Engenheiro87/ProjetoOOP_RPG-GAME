@@ -4,6 +4,7 @@ from app.models.furniture import Furniture;
 from app.controllers.data_record import StaticData;
 from app.models.character import NPC;
 from app.models.cutscene import Cutscene;
+from app.models.dice import Dice;
 
 @dataclass
 class Act:
@@ -31,6 +32,10 @@ class Act:
     @property
     def default_data(self)->StaticData:
         return self.__default_data;
+
+    @property
+    def layer(self):
+        return self.__current_layer;
 
 
     #############################################
@@ -66,12 +71,13 @@ class Act:
                 "evidence_data":{ # <- evidences data
                     evidence_name:self.__dependencies["get_evidence_data"](evidence_name)
                     for evidence_name in location_evidence_dict.get(name, [])
+                    if not self.__dependencies['get_player_evidence'](self.__dependencies['get_evidence_data'](evidence_name)['display_name'])
                 }
             }
             for name in default_location_furniture # name = wooden-desk
         };
 
-        return Location(loc_data, npc_data, furniture_data);
+        return Location(loc_id,loc_data, npc_data, furniture_data);
 
     def __load_connections(self):
         for loc_name, location in self.__loaded_locations.items():
@@ -80,8 +86,13 @@ class Act:
                 if other_location:
                     location.connect_to(other_location);
 
-    def start(self, layer:int=0):
+    def start(self, layer:int=None, loc_id:str=None):
         self.load();
+        if layer and loc_id:
+            print(f"Got custom layer = {layer} and location = {loc_id}");
+            self.__current_layer = layer;
+            self.__current_location = self.__loaded_locations.get(loc_id);#here
+            return;
         self.progress_story();
 
     def destroy(self):
@@ -139,6 +150,7 @@ class Act:
                 self.__dependencies["play_cutscene"](
                     Cutscene(self.parse_lines([f"nar/You need \"{key}\" to unlock this place."]))
                 );
+                print(f"Couldn't find key \"{key}\" in players' backpack")
                 return False, {
                     "required_key":key
                 };
@@ -163,6 +175,19 @@ class Act:
             return False, "not found";
         stats = self.__dependencies["get_player_stats"]();
         result = furniture.inspect(stats);
+        if result['damages']:
+            self.__dependencies['damage_player'](Dice().roll());
+        self.__dependencies['prompt_player'](self.get_options_table([
+            {
+                "display":f"Take {evidence_name}",
+                "action":lambda k=evidence: self.__dependencies['grab_evidence'](furniture.take_evidence(evidence)),
+                "cutscene":lambda k=evidence: self.__dependencies['play_cutscene'](
+                    Cutscene(self.parse_lines([f"nar/You found the \"{evidence.name}\" evidence!"]))
+                )
+            }
+            for evidence_name, evidence in result['evidences'].items()
+        ])
+        );
         return result;
 
     def grab_evidence(self, furniture_name:str, evidence_name:str)->dict:
@@ -219,7 +244,32 @@ class Act:
             48+i:{
                 "display":f"{i} - Talk to {self.__current_location.npcs[key].name}",
                 "action":lambda k=key: self.talk_to_npc(k),
-                "key":key
             }
             for i, key in enumerate(dialogue_options, start=1)
+        };
+
+    def get_inspection_options(self):
+        return {
+            48+i:{
+                "display":f"{i} - Inspect {self.__current_location.get_furniture(furniture).name}",
+                "action":lambda k=furniture: self.inspect(furniture),
+            }
+            for i, furniture in enumerate(self.__current_location.furnitures, start=1)
+        };
+
+    def get_options_table(self, choices:list[dict])->dict:
+        return {
+            48+i:{
+                "display":f"{i} - {choice['display']}",
+                "action":choice['action'],
+                "cutscene":choice.get('cutscene', None)
+            }
+            for i, choice in enumerate(choices, start=1)
+        }
+
+    def pack(self)->dict:
+        return {
+            "act_number":self.__act_number,
+            "act_layer":self.__current_layer,
+            "act_location":self.__current_location.id
         };

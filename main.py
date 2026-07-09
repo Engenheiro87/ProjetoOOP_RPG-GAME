@@ -17,11 +17,11 @@ if __name__ == "__main__":
 
     running = True;
 
-    while running:
+    while running and game.state!= "end":
         # process events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                game.update_game_state("exit")
+                game.destroy();
                 running = False;
                 break;
             if event.type == pygame.KEYDOWN:
@@ -37,6 +37,8 @@ if __name__ == "__main__":
         pgs.draw_screen(ScreenData(
             game.current_act and game.current_act.current_location.name,
             "dark-blue",
+            hint=game.hint or
+            (game.options and "ESC - Back") or None,
             character=game.current_cutscene and game.current_cutscene.character+":",
             dialogue=game.current_cutscene and game.current_cutscene.dialogue,
             location_description=game.current_act and game.current_act.current_location.description,
@@ -47,7 +49,8 @@ if __name__ == "__main__":
             ["Enter - Next"] or
             [
                 "M - Move to another room",
-                "T - Talk to a character"
+                "T - Talk to a character",
+                "I - Inspect furniture",
             ]
         ));
     

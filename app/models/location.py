@@ -4,7 +4,8 @@ from app.models.character import NPC
 from app.models.evidence import Evidence;
 
 class Location:
-    def __init__(self, location_data:dict, npc_data:dict={}, furniture_data:dict={}):
+    def __init__(self, loc_id:str, location_data:dict, npc_data:dict={}, furniture_data:dict={}):
+        self.__location_id = loc_id;
         self.__name:str = location_data['display_name'];
         self.__furnitures:list[Furniture] = {
             furniture_name:Furniture(
@@ -36,6 +37,10 @@ class Location:
     @property
     def name(self):
         return self.__name;
+
+    @property
+    def id(self):
+        return self.__location_id;
 
     @property
     def connections(self):

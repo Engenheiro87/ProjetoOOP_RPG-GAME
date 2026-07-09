@@ -12,7 +12,7 @@ class Game:
         self.__player = Player();
         self.__current_act = None;
         self.__data = {
-            "game_data" : DynamicData("game.json"),
+            "game_data" : DynamicData("game.json", packing_function=self.pack),
             "game_default":StaticData("game_default.json"),
             "evidence_default":StaticData("evidence_default.json"),
             "player_data": DynamicData("player.json", self.__player.pack),
@@ -26,6 +26,9 @@ class Game:
             "play_cutscene":self.play_cutscene,
             "get_evidence_data":self.get_evidence_data,
             "get_char_tags":self.get_char_tags,
+            "damage_player":self.damage_player,
+            "prompt_player":self.prompt_player,
+            "grab_evidence":self.grab_evidence,
         };
         self.__keybinds = {
             pygame.K_RETURN : {
@@ -39,8 +42,18 @@ class Game:
             },
 
             pygame.K_t : {
-                "state":lambda:not(self.current_cutscene) and self.current_act,
+                "state":lambda:not(self.current_cutscene) and self.current_act and not self.__options,
                 "action":self.get_dialogue_options,
+            },
+
+            pygame.K_x: {
+                "state":lambda:not(self.current_cutscene) and not self.__options,
+                "action":self.destroy
+            },
+
+            pygame.K_i : {
+                "state":lambda:not(self.current_cutscene and self.current_act and not self.__options),
+                "action":self.get_inspection_options,
             },
 
             pygame.K_ESCAPE : {
@@ -52,17 +65,18 @@ class Game:
         self.__game_state = "N/A";
         self.__current_cutscene = None;
         self.__options = None;
+        self.__hint = None;
         self.start();
 
     ##############################################################
     # attributes (for bash testing)
     @property
-    def options(self):
-        return self.__options;
+    def hint(self):
+        return self.__hint;
 
     @property
-    def game_state(self):
-        return self.__game_state;
+    def options(self):
+        return self.__options;
 
     @property
     def keybinds(self):
@@ -105,6 +119,7 @@ class Game:
             if type(data) == DynamicData:
                 print(f"Saving DynamicData \"{dt_name}\"");
                 data.save();
+        self.__game_state = "end";
 
     def read_game_data(self, data_name:str)->StaticData|DynamicData:
         return self.__data.get(data_name, None);
@@ -127,6 +142,8 @@ class Game:
         if self.__current_act:
             self.__current_act.destroy();
         game_data:DynamicData = self.read_game_data("game_data");
+        # previous_session = game_data.read_data("act") or {};
+        # previous_number = previous_session.get("act_number");
         act = Act(
             self.__act_dependencies,
             act_number,
@@ -134,7 +151,10 @@ class Game:
             game_data.read_data(f"act{act_number}")
         );
         self.__current_act = act;
-        act.start();
+        act.start(
+            # layer=act_number==previous_number and previous_number,
+            # loc_id=act_number==previous_number and previous_session.get("act_location")
+        );
 
     def update_game_state(self, new_state:str):
         self.__game_state = new_state;
@@ -147,7 +167,10 @@ class Game:
         stats = {
             "health":18,
             "power":player_data.read_data("power", int, 3),
-            "evidences":[Evidence(data) for data in player_data.read_data("evidences", default=[])],
+            "evidences":[
+                Evidence(data['name'], data['required_ability'], data['required_level']) 
+                for data in player_data.read_data("evidences", default=[])
+            ],
             "intelligence":player_data.read_data("intelligence", default=3)
         };
         new_character = PlayerCharacter(
@@ -167,8 +190,8 @@ class Game:
         if self.__player.character.is_dead():
             print("player died.");
     
-    def prompt_player(self, data:dict):
-        pass;
+    def prompt_player(self, options:dict):
+        self.__options = options;
 
     def get_location_data(self, location_name:str)->dict:
         return StaticData(
@@ -188,6 +211,11 @@ class Game:
     def play_cutscene(self, cutscene:Cutscene):
         cutscene.next();
         self.__current_cutscene = cutscene;
+
+    def pack(self)->dict:
+        return {
+            "act":self.__current_act and self.__current_act.pack(),
+        };
     
     def progress_cutscene(self):
         self.__current_cutscene.next();
@@ -207,12 +235,17 @@ class Game:
     def get_travel_options(self):
         if not self.__current_act or self.__current_cutscene or self.__options:
             return;
-        self.__options = self.__current_act.get_travel_options();
+        self.prompt_player(self.__current_act.get_travel_options());
     
     def get_dialogue_options(self):
         if not self.__current_act or self.__current_cutscene or self.__options:
             return;
-        self.__options = self.__current_act.get_dialogue_options();
+        self.prompt_player(self.__current_act.get_dialogue_options());
+    
+    def get_inspection_options(self):
+        if not self.__current_act or self.__current_cutscene or self.__options:
+            return;
+        self.prompt_player(self.__current_act.get_inspection_options());
     
     def cancel_options(self):
         self.__options = None;
@@ -222,4 +255,11 @@ class Game:
             return;
         option = self.__options[decision];
         self.__options = None;
-        return option['action']();
+        action = option['action'];
+        cutscene = option.get('cutscene');
+        option['action']();
+        if cutscene:
+            cutscene();
+
+    def grab_evidence(self, evidence:Evidence):
+        self.__player.character.take_evidence(evidence);

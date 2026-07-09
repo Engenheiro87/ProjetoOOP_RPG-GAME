@@ -37,6 +37,8 @@ class Evidence:
         };
 
     def is_visible(self, abilities:list)->bool:
+        if not self.__required_ability:
+            return True;
         for ability in abilities:
             name = ability.name;
             level = ability.level;

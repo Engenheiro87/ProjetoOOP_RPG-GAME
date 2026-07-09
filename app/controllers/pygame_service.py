@@ -60,6 +60,14 @@ class PygameService:
             font=self.__H3
         )
 
+        if screen.hint:
+            self.render_text(
+                screen.hint,
+                self.color_from_string("white"),
+                y = .7,
+                font = self.__H4
+            );
+
         # actions
         pygame.draw.line(
             self.__window,
