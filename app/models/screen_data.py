@@ -7,5 +7,5 @@ class ScreenData:
 
     character:str = field(default_factory=str);
     dialogue:str = field(default_factory=str);
-    actions: dict = field(default_factory=dict);
+    actions: tuple = field(default_factory=tuple);
     location_description: str = field(default_factory=str);

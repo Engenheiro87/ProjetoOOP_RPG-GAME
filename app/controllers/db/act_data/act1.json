@@ -1,16 +1,16 @@
 {
     "display_name":"Act 1 - A new mystery",
     "starting_location":"entrance",
-    "layers":[
+    "layers":{
 
-        {
+        "0":{
             "cutscene":[
                 "nar/It was a rainy night, Harry Potter was sleeping...",
                 "nar/Until a particularly loud thunder woke him up."
             ]
         }
         
-    ],
+    },
 
     "locations":{
         
@@ -19,19 +19,30 @@
             "evidences":{
                 "wooden-desk": ["rusty-key"]
             }
+        },
+        "hagrids-hut":{
+            "npcs":["hagrid"]
         }
 
     },
 
     "characters":{
         "hermione":{
-            "dialogues":[
-                {
-                    "lines":["her/Hello Harry."],
+            "dialogues":{
+                "0":{
+                    "lines":["hermione/Hello Harry."],
                     "moveto":"grounds",
                     "progress":true
                 }
-            ]
+            }
+        },
+        "hagrid":{
+            "dialogues":{
+                "1":{
+                    "lines":["hagrid/Hi, I'm hagrid.", "harry/Hello, Hagrid."],
+                    "progress":true
+                }
+            }
         }
     }
 }

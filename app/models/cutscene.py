@@ -4,7 +4,15 @@ import pygame
 @dataclass
 class Cutscene:
     
-    script: list
+    __script: list[dict];
+
+    character:str = field(init=False, default_factory=str);
+    dialogue:str = field(init=False, default_factory=str);
+    __iteration:int = field(init=False, default_factory=lambda: -1);
+
+    @property
+    def finished(self)->bool:
+        return self.__iteration>=len(self.__script)
 
     def run(self, screen) -> None:
        
@@ -30,3 +38,9 @@ class Cutscene:
                 
                 
                 pygame.time.delay(3000)
+    
+    def next(self):
+        self.__iteration+=1;
+        if self.finished:
+            return;
+        self.character, self.dialogue = self.__script[self.__iteration];

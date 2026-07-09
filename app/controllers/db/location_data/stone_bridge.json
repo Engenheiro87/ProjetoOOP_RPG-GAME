@@ -2,6 +2,7 @@
     "display_name":"Stone Bridge",
     "furniture":[],
     "connections":[
-        "entrance"
+        "entrance",
+        "library-annex"
     ]   
 }

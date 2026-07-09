@@ -78,3 +78,4 @@ class Location:
     
     def get_furniture(self, furniture_name:str)->Furniture|None:
         return self.__furnitures.get(furniture_name);
+        

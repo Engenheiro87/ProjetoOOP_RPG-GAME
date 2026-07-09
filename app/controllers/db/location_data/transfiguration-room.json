@@ -1,0 +1,8 @@
+{
+    "display_name":"Transfiguration Classroom",
+    "description":"transfiguration classroom description...",
+    "furniture":[],
+    "connections":[
+        "library-annex"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "display_name":"Forbidden Forest",
+    "description":"forbbiden forest description...",
+    "furniture":[],
+    "connections":[
+        "grounds"
+    ]
+}

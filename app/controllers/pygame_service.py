@@ -71,9 +71,9 @@ class PygameService:
         actions_length = len(screen.actions);
         current = 1;
 
-        for key, action_name in screen.actions.items():
+        for action in screen.actions:
             self.render_text(
-                f"{key} - {action_name}",
+                action,
                 self.color_from_string("white"),
                 y = .75 + .15*current/actions_length,
                 x = .5,

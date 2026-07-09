@@ -1,0 +1,11 @@
+{
+    "display_name":"Library Annex",
+    "description":"library annex description...",
+    "furniture":[],
+    "connections":[
+        "stone_bridge",
+        "transfiguration-room",
+        "h-m-c",
+        "floor2"
+    ]
+}

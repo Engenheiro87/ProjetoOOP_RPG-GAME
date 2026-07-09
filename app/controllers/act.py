@@ -3,6 +3,7 @@ from app.models.location import Location;
 from app.models.furniture import Furniture;
 from app.controllers.data_record import StaticData;
 from app.models.character import NPC;
+from app.models.cutscene import Cutscene;
 
 @dataclass
 class Act:
@@ -27,6 +28,10 @@ class Act:
     def current_location(self)->Location:
         return self.__current_location;
 
+    @property
+    def default_data(self)->StaticData:
+        return self.__default_data;
+
 
     #############################################
 
@@ -38,7 +43,6 @@ class Act:
         };
         self.__load_connections();
         self.__current_location = self.__loaded_locations[self.__default_data.read_data("starting_location")];
-        print(f"Set current location as {self.__current_location.name}");
     
     def load_location(self, loc_id:str)->Location:
         # location data
@@ -71,7 +75,6 @@ class Act:
 
     def __load_connections(self):
         for loc_name, location in self.__loaded_locations.items():
-            location:Location = location;
             for connected_name in self.__dependencies['get_loc_data'](loc_name)['connections']:
                 other_location:Location = self.__loaded_locations.get(connected_name);
                 if other_location:
@@ -84,23 +87,37 @@ class Act:
     def destroy(self):
         print("asked to destroy act.");
 
-    def talk_to_npc(self, char_id:str)->tuple[bool, str]|dict:
+    def talk_to_npc(self, char_id:str):
         npc = self.__current_location.get_character(char_id);
         if not npc:
             return False, "missing npc";
-        cutscene = self.get_cutscene(char_id, self.__current_layer);
-        self.__dependencies["play_cutscene"](cutscene['lines']);
+
+        cutscene = self.get_cutscene(char_id, self.__current_layer) or {};
+        self.__dependencies['play_cutscene'](
+            Cutscene(self.parse_lines(cutscene.get("lines", [f"{char_id}/..."])))
+        );
+
         if cutscene.get("moveto"):
             self.teleport(npc, self.__loaded_locations[cutscene['moveto']]);
-
+        if cutscene.get("progress"):
+            self.progress_story();
+    
+    def parse_lines(self, lines:list[str])->list:
+        char_tags = self.__dependencies['get_char_tags']();
+        def parse_line(line:str)->tuple:
+            tag, line = line.strip().split("/");
+            return char_tags.get(tag, "???"), line
+        return [
+            parse_line(line)
+            for line in lines
+        ];
+    
     def get_cutscene(self, char_id:str, layer:int)->dict|None:
         char_data = self.__default_data.read_data("characters").get(char_id);
         if not char_data or not char_data.get("dialogues"):
             return;
         dialogues = char_data['dialogues'];
-        if len(dialogues)<layer+1:
-            return;
-        return dialogues[layer];
+        return dialogues.get(str(layer));
     
     def teleport(self, npc:NPC, location:Location):
         print(f"Teleporting \"{npc.name}\" to \"{location.name}\"");
@@ -112,10 +129,16 @@ class Act:
         if not target:
             return False, "Location does not exist.";
         if target.blocked:
+            self.__dependencies["play_cutscene"](
+                Cutscene(self.parse_lines(["nar/This path is blocked."]))
+            );
             return False, "blocked";
         elif target.required_key:
             key = target.required_key;
             if not self.__dependencies['get_player_evidence'](key):
+                self.__dependencies["play_cutscene"](
+                    Cutscene(self.parse_lines([f"nar/You need \"{key}\" to unlock this place."]))
+                );
                 return False, {
                     "required_key":key
                 };
@@ -152,10 +175,14 @@ class Act:
         self.__current_layer+=increment;
         layer_now = self.__current_layer;
 
-        layer_data = self.__default_data.read_data("layers")[layer_now];
+        layer_data = self.__default_data.read_data("layers").get(str(layer_now));
+        if not layer_data:
+            return;
         cutscene = layer_data.get("cutscene");
         if cutscene:
-            self.__dependencies["play_cutscene"](cutscene);
+            self.__dependencies["play_cutscene"](
+                Cutscene(self.parse_lines(cutscene))
+            );
 
 
     def get_flag(self, flag_name:str):
@@ -166,3 +193,33 @@ class Act:
 
     def change_flag(self, flag_name:str, new_value:bool):
         self.__flags[flag_name] = new_value;
+
+    def get_travel_options(self):
+        location_options = {
+            loc_id:location
+            for loc_id, location in self.__loaded_locations.items()
+            if location in self.__current_location.connections
+        };
+        return {
+            48+i:{
+                "display":f"{i} - Travel to {self.__loaded_locations[key].name}",
+                "action":lambda k=key: self.travel_to(k),
+                "key":key
+            }
+            for i, key in enumerate(location_options, start=1)
+        };
+
+    def get_dialogue_options(self):
+        dialogue_options = {
+            char_id:character
+            for char_id, character in self.__current_location.npcs.items()
+            # if self.get_cutscene(char_id, self.__current_layer)
+        };
+        return {
+            48+i:{
+                "display":f"{i} - Talk to {self.__current_location.npcs[key].name}",
+                "action":lambda k=key: self.talk_to_npc(k),
+                "key":key
+            }
+            for i, key in enumerate(dialogue_options, start=1)
+        };

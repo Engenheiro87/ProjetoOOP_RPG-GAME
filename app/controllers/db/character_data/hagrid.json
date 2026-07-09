@@ -1,0 +1,9 @@
+{
+    "name":"Hagrid",
+    "id":"hagrid",
+    "role":"friend",
+    "stats":{
+        "intelligence":9,
+        "power":16
+    }
+}

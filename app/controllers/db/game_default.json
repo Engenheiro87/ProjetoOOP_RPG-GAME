@@ -5,7 +5,13 @@
         "paved_courtyard",
         "dungeons",
         "stone_bridge",
-        "grounds"
+        "grounds",
+        "hagrids-hut",
+        "forbidden-forest",
+
+        "library-annex",
+        "transfiguration-room",
+        "h-m-c"
     ],
 
     "furniture":{
@@ -16,11 +22,11 @@
 
     "char_tags":{
         "nar":"Narrator",
-        "har":"Harry",
-        "her":"Hermione",
+        "harry":"Harry",
+        "hermione":"Hermione",
         "ron":"Ronny",
-        "dum":"Dumbledore",
-        "hag":"Hagrid",
-        "str":"???"
+        "dumbledore":"Dumbledore",
+        "hagrid":"Hagrid",
+        "stranger":"???"
     }
 }

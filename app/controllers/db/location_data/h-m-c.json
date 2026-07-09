@@ -1,0 +1,8 @@
+{
+    "display_name":"History of Magic Classroom",
+    "description":"history of magic classroom description...",
+    "furniture":[],
+    "connections":[
+        "library-annex"
+    ]
+}

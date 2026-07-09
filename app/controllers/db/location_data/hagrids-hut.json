@@ -1,0 +1,8 @@
+{
+    "display_name":"Hagrid's Hut",
+    "description":"cabin description...",
+    "furniture":[],
+    "connections":[
+        "grounds"
+    ]
+}

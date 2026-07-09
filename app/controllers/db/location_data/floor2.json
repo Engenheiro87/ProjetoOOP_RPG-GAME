@@ -1,0 +1,8 @@
+{
+    "display_name":"Floor 2",
+    "description":"floor 2 description...",
+    "furniture":[],
+    "connections":[
+        "library-annex"
+    ]
+}

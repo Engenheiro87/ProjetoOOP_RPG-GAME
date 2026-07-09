@@ -15,7 +15,6 @@ class Player:
         return self.__character;
     
     def set_character(self, character:PlayerCharacter):
-        print(f"New character being set for player \"{self.id}\" = {character}");
         self.__character = character;
 
     def pack(self)->dict:

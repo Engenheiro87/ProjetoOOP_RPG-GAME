@@ -1,9 +1,11 @@
+import pygame;
 from app.controllers.data_record import StaticData, DynamicData;
 from app.controllers.act import Act;
 from app.models.player import Player;
 from app.models.character import PlayerCharacter;
 from app.models.evidence import Evidence;
 from app.models.ability import Ability;
+from app.models.cutscene import Cutscene;
 
 class Game:
     def __init__(self):
@@ -23,13 +25,49 @@ class Game:
             "get_player_stats":self.get_player_stats,
             "play_cutscene":self.play_cutscene,
             "get_evidence_data":self.get_evidence_data,
+            "get_char_tags":self.get_char_tags,
         };
+        self.__keybinds = {
+            pygame.K_RETURN : {
+                "state":lambda: self.__current_cutscene!=None,
+                "action":self.progress_cutscene,
+            },
+
+            pygame.K_m: {
+                "state":lambda:not(self.current_cutscene) and self.current_act,
+                "action": self.get_travel_options,
+            },
+
+            pygame.K_t : {
+                "state":lambda:not(self.current_cutscene) and self.current_act,
+                "action":self.get_dialogue_options,
+            },
+
+            pygame.K_ESCAPE : {
+                "state":lambda: not(self.current_cutscene) and self.__options,
+                "action":self.cancel_options
+            }
+
+        }
         self.__game_state = "N/A";
-        self.__pending_cutscene = None;
+        self.__current_cutscene = None;
+        self.__options = None;
         self.start();
 
     ##############################################################
     # attributes (for bash testing)
+    @property
+    def options(self):
+        return self.__options;
+
+    @property
+    def game_state(self):
+        return self.__game_state;
+
+    @property
+    def keybinds(self):
+        return self.__keybinds;
+
     @property
     def player(self):
         return self.__player;
@@ -41,6 +79,14 @@ class Game:
     @property
     def state(self)->str:
         return self.__game_state;
+
+    @property
+    def current_cutscene(self):
+        return self.__current_cutscene;
+
+    @property
+    def current_act(self):
+        return self.__current_act;
 
     ##############################################################
     
@@ -139,22 +185,41 @@ class Game:
             raise Exception("Attempt to perform a 'player_has_evidence' check without a player instantiated.");
         return self.__player.character.get_evidence(evidence_name);
 
-    def play_cutscene(self, script:list)->list[str]:
-        game_default:StaticData = self.__data["game_default"];
-        char_tags:dict = game_default.read_data("char_tags");
-
-        def parse_line(line:str)->str:
-            tag, line = line.strip().split("/");
-            return f"{char_tags.get(tag, "???")}: {line}";
-
-        parsed = [
-                parse_line(line)
-                for line in script
-        ];
-        return parsed;
+    def play_cutscene(self, cutscene:Cutscene):
+        cutscene.next();
+        self.__current_cutscene = cutscene;
+    
+    def progress_cutscene(self):
+        self.__current_cutscene.next();
+        if not self.__current_cutscene or self.__current_cutscene.finished:
+            self.__current_cutscene = None;
+            return;
 
     def get_player_stats(self)->dict:
         return self.__player.character.pack();
 
     def get_evidence_data(self, evidence_name:str)->dict:
         return self.__data["evidence_default"].read_data(evidence_name);
+
+    def get_char_tags(self):
+        return self.__data['game_default'].read_data("char_tags");
+
+    def get_travel_options(self):
+        if not self.__current_act or self.__current_cutscene or self.__options:
+            return;
+        self.__options = self.__current_act.get_travel_options();
+    
+    def get_dialogue_options(self):
+        if not self.__current_act or self.__current_cutscene or self.__options:
+            return;
+        self.__options = self.__current_act.get_dialogue_options();
+    
+    def cancel_options(self):
+        self.__options = None;
+
+    def pick_option(self, decision:int):
+        if not self.__options or not decision in self.__options:
+            return;
+        option = self.__options[decision];
+        self.__options = None;
+        return option['action']();

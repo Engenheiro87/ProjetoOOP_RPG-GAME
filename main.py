@@ -24,19 +24,31 @@ if __name__ == "__main__":
                 game.update_game_state("exit")
                 running = False;
                 break;
+            if event.type == pygame.KEYDOWN:
+                key = event.key;
+                if key in game.keybinds: 
+                    routed = game.keybinds[key];
+                    if routed['state']():
+                        routed['action']();
+                elif game.options and (key in game.options):
+                    game.pick_option(key);
     
         # draw screen
         pgs.draw_screen(ScreenData(
-            "Loading game...",
+            game.current_act and game.current_act.current_location.name,
             "dark-blue",
-            character="Character Name:",
-            dialogue="Character dialogue here...",
-            location_description="Location description",
-            actions= {
-                "E":"Talk to character",
-                "F":"Inspect",
-                "M":"Move to another Location"
-            }
+            character=game.current_cutscene and game.current_cutscene.character+":",
+            dialogue=game.current_cutscene and game.current_cutscene.dialogue,
+            location_description=game.current_act and game.current_act.current_location.description,
+            actions= game.options and [
+                option['display']
+                for key, option in game.options.items()
+            ]  or game.current_cutscene and
+            ["Enter - Next"] or
+            [
+                "M - Move to another room",
+                "T - Talk to a character"
+            ]
         ));
     
         pygame.display.flip();

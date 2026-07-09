@@ -2,6 +2,8 @@
     "display_name":"Grounds",
     "furniture":[],
     "connections":[
-        "entrance"
+        "entrance",
+        "hagrids-hut",
+        "forbidden-forest"
     ]   
 }
