@@ -5,6 +5,7 @@ import pygame
 class Cutscene:
     
     __script: list[dict];
+    __callable:callable|None = field(default_factory=lambda:None);
 
     character:str = field(init=False, default_factory=str);
     dialogue:str = field(init=False, default_factory=str);
@@ -42,5 +43,7 @@ class Cutscene:
     def next(self):
         self.__iteration+=1;
         if self.finished:
+            if self.__callable:
+                self.__callable();
             return;
         self.character, self.dialogue = self.__script[self.__iteration];

@@ -1,7 +1,7 @@
 {
     "act": {
         "act_number": 1,
-        "act_layer": 2,
+        "act_layer": 0,
         "act_location": "entrance"
     }
 }

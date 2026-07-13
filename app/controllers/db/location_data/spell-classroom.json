@@ -1,0 +1,9 @@
+{
+    "display_name":"Spell Classroom",
+    "description":"spell classroom description...",
+    "furniture":["wooden-desk"],
+    "fear": 3,
+    "connections":[
+        "floor2"
+    ]
+}

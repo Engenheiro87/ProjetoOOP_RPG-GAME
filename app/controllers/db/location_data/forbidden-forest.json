@@ -2,6 +2,7 @@
     "display_name":"Forbidden Forest",
     "description":"forbbiden forest description...",
     "furniture":[],
+    "fear":15,
     "connections":[
         "grounds"
     ]

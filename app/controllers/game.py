@@ -6,6 +6,9 @@ from app.models.character import PlayerCharacter;
 from app.models.evidence import Evidence;
 from app.models.ability import Ability;
 from app.models.cutscene import Cutscene;
+from app.models.option_table import OptionTable;
+from time import sleep;
+from threading import Thread;
 
 class Game:
     def __init__(self):
@@ -29,10 +32,11 @@ class Game:
             "damage_player":self.damage_player,
             "prompt_player":self.prompt_player,
             "grab_evidence":self.grab_evidence,
+            "increase_stat":self.increase_stat,
         };
         self.__keybinds = {
             pygame.K_RETURN : {
-                "state":lambda: self.__current_cutscene!=None,
+                "state":lambda: self.current_cutscene!=None,
                 "action":self.progress_cutscene,
             },
 
@@ -57,15 +61,16 @@ class Game:
             },
 
             pygame.K_ESCAPE : {
-                "state":lambda: not(self.current_cutscene) and self.__options,
+                "state":lambda: not(self.current_cutscene) and (self.__options and not self.__options.block_escape),
                 "action":self.cancel_options
             }
 
         }
         self.__game_state = "N/A";
-        self.__current_cutscene = None;
+        self.__current_cutscene = [];
         self.__options = None;
         self.__hint = None;
+        self.__announcement = None;
         self.start();
 
     ##############################################################
@@ -96,11 +101,17 @@ class Game:
 
     @property
     def current_cutscene(self):
-        return self.__current_cutscene;
+        if len(self.__current_cutscene)<=0:
+            return;
+        return self.__current_cutscene[0];
 
     @property
     def current_act(self):
         return self.__current_act;
+
+    @property
+    def announcement(self):
+        return self.__announcement;
 
     ##############################################################
     
@@ -111,8 +122,13 @@ class Game:
         self.reload_character();
         return self;
 
-    def increase_ability(self, name:str, increment:float):
-        pass;
+    def increase_stat(self, spectrum:str, increment:float)->int:
+        player_stats = self.get_player_stats();
+        if player_stats[spectrum]>=18:
+            return 0;
+        character = self.__player.character;
+        result = character.improve(spectrum, increment);
+        return result or 0;
 
     def destroy(self):
         for dt_name, data in self.__data.items():
@@ -184,14 +200,26 @@ class Game:
         if not self.__player:
             raise Exception("No player instantiated to be damaged.");
         if self.__player.character.is_dead():
-            print("player is already dead.");
             return;
         self.__player.character.take_damage(damage);
         if self.__player.character.is_dead():
-            print("player died.");
+            print("player died. Reestarting act.");
+            self.reestart();
+
+    def reestart(self):
+        print("reestarting...");
+        self.__announcement = "Game Over.";
+        sleep(2);
+        def un_announce():
+            sleep(3);
+            self.__announcement = "";
+        new_thread = Thread(target=un_announce);
+        new_thread.start();
+        self.reload_character();
+        self.load_act(1);
     
-    def prompt_player(self, options:dict):
-        self.__options = options;
+    def prompt_player(self, options:dict, block_esc:bool=False):
+        self.__options = OptionTable(options, block_esc);
 
     def get_location_data(self, location_name:str)->dict:
         return StaticData(
@@ -210,7 +238,7 @@ class Game:
 
     def play_cutscene(self, cutscene:Cutscene):
         cutscene.next();
-        self.__current_cutscene = cutscene;
+        self.__current_cutscene.append(cutscene);
 
     def pack(self)->dict:
         return {
@@ -218,10 +246,16 @@ class Game:
         };
     
     def progress_cutscene(self):
-        self.__current_cutscene.next();
-        if not self.__current_cutscene or self.__current_cutscene.finished:
-            self.__current_cutscene = None;
+        current_cutscene:Cutscene = self.current_cutscene;
+        if not current_cutscene:
             return;
+        elif not current_cutscene.finished:
+            current_cutscene.next();
+        
+        if current_cutscene.finished:
+            self.__current_cutscene.remove(current_cutscene);
+            if self.current_cutscene:
+                return self.progress_cutscene();
 
     def get_player_stats(self)->dict:
         return self.__player.character.pack();
@@ -248,12 +282,15 @@ class Game:
         self.prompt_player(self.__current_act.get_inspection_options());
     
     def cancel_options(self):
+        if self.__options.block_escape:
+            print("blocked escape.");
+            return;
         self.__options = None;
 
     def pick_option(self, decision:int):
-        if not self.__options or not decision in self.__options:
+        if not self.__options or not self.__options.get_option(decision):
             return;
-        option = self.__options[decision];
+        option = self.__options.get_option(decision);
         self.__options = None;
         action = option['action'];
         cutscene = option.get('cutscene');

@@ -16,7 +16,7 @@ class Dice:
         d3 = self.roll()
         
         total_sum = d1 + d2 + d3
-        is_success = total_sum <= nh_attribute
+        is_success = total_sum < nh_attribute
         
         return {
             "rolls": [d1, d2, d3],

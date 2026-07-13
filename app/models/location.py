@@ -6,6 +6,7 @@ from app.models.evidence import Evidence;
 class Location:
     def __init__(self, loc_id:str, location_data:dict, npc_data:dict={}, furniture_data:dict={}):
         self.__location_id = loc_id;
+        self.__fear_level = location_data.get("fear", 3);
         self.__name:str = location_data['display_name'];
         self.__furnitures:list[Furniture] = {
             furniture_name:Furniture(
@@ -61,6 +62,10 @@ class Location:
     @property
     def furnitures(self):
         return self.__furnitures;
+
+    @property
+    def fear_level(self):
+        return self.__fear_level;
 
     def is_connected_to(self, location:Location)->bool:
         return location!= self and location in self.__connections;

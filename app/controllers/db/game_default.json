@@ -8,10 +8,14 @@
         "grounds",
         "hagrids-hut",
         "forbidden-forest",
-
         "library-annex",
         "transfiguration-room",
-        "h-m-c"
+        "h-m-c",
+        "floor2",
+        "myrtles-bathroom",
+        "spell-classroom",
+        "chamber-entrance",
+        "chamber-secrets"
     ],
 
     "furniture":{
@@ -27,6 +31,7 @@
         "ron":"Ronny",
         "dumbledore":"Dumbledore",
         "hagrid":"Hagrid",
-        "stranger":"???"
+        "stranger":"???",
+        "stat":"Stats"
     }
 }

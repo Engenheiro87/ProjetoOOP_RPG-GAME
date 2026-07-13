@@ -30,22 +30,23 @@ if __name__ == "__main__":
                     routed = game.keybinds[key];
                     if routed['state']():
                         routed['action']();
-                elif game.options and (key in game.options):
+                elif game.options and (game.options.get_option(key)):
                     game.pick_option(key);
     
         # draw screen
         pgs.draw_screen(ScreenData(
             game.current_act and game.current_act.current_location.name,
             "dark-blue",
+            game.announcement,
             hint=game.hint or
-            (game.options and "ESC - Back") or None,
+            (game.options and (not game.options.block_escape) and "ESC - Back") or None,
             character=game.current_cutscene and game.current_cutscene.character+":",
             dialogue=game.current_cutscene and game.current_cutscene.dialogue,
             location_description=game.current_act and game.current_act.current_location.description,
-            actions= game.options and [
+            actions= game.options and ([
                 option['display']
-                for key, option in game.options.items()
-            ]  or game.current_cutscene and
+                for key, option in game.options.get_options().items()
+            ] or ["[no options available]"])  or game.current_cutscene and
             ["Enter - Next"] or
             [
                 "M - Move to another room",

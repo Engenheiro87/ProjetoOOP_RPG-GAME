@@ -4,5 +4,6 @@
     "connections":[
         "entrance"
     ],
+    "fear":3,
     "key":"Old Rusty Key"
 }

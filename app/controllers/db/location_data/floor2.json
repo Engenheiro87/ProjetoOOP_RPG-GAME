@@ -2,7 +2,10 @@
     "display_name":"Floor 2",
     "description":"floor 2 description...",
     "furniture":[],
+    "fear":3,
     "connections":[
-        "library-annex"
+        "library-annex",
+        "spell-classroom",
+        "myrtles-bathroom"
     ]
 }

@@ -1,6 +1,7 @@
 {
     "display_name":"Dungeons",
     "furniture":[],
+    "fear":5,
     "connections":[
         "entrance"
     ]   

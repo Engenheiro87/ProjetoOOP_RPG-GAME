@@ -1,6 +1,7 @@
 {
     "display_name":"Grounds",
     "furniture":[],
+    "fear":4,
     "connections":[
         "entrance",
         "hagrids-hut",

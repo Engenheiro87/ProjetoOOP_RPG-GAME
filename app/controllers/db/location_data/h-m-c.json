@@ -2,6 +2,7 @@
     "display_name":"History of Magic Classroom",
     "description":"history of magic classroom description...",
     "furniture":[],
+    "fear": 3,
     "connections":[
         "library-annex"
     ]

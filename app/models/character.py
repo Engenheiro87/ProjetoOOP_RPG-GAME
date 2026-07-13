@@ -24,6 +24,12 @@ class Character:
     def power(self):
         return self.__power;
 
+    @power.setter
+    def power(self, new_value:int):
+        if new_value<3 or new_value>18:
+            return;
+        self.__power = new_value;
+
     def take_damage(self, damage:int):
         if self.__health>3:
             self.__health = max(self.__health-damage, 3);
@@ -68,15 +74,46 @@ class NPC(Character):
     def id(self)->str:
         return self.__id;
 
+class Monster(NPC):
+    def __init__(self, name, id,  spectrum:str, stats = {}):
+        super().__init__(name, id, NPC.roles['enemy'], stats),
+        self.__spectrum = spectrum;
+
+    @property
+    def spectrum(self):
+        return self.__spectrum;
+
+
 class PlayerCharacter(Character):
     def __init__(self, name:str, stats:dict, abilities:list=None):
         super().__init__(name, stats['health'], stats['power'], stats['evidences']);
         self.__intelligence = stats['intelligence'] or 3;
         self.__abilities = abilities or [];
+        self.__improvements = {
+            "power":self.improve_power,
+            "intelligence":self.improve_intelligence
+        };
     
     @property
     def intelligence(self):
         return self.__intelligence;
+
+    def improve(self, spectrum:str, increment:int):
+        print(f"asked to improve spectrum \"{spectrum}\" with increment = {increment}");
+        improvement = self.__improvements.get(spectrum);
+        if not improvement:
+            print(f"not found function to improve spectrum \"{spectrum}\"");
+            return;
+        improvement(increment);
+        return increment;
+
+    def improve_power(self, increment:int):
+        print("increased power.");
+        self.power+=increment
+
+    def improve_intelligence(self, increment:int):
+        print("increased intelligence.");
+        self.__intelligence+=increment;
 
     def get_ability(self, name:str):
         for ability in self.__abilities:

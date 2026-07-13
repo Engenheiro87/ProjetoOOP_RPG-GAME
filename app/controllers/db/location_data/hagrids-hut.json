@@ -2,6 +2,7 @@
     "display_name":"Hagrid's Hut",
     "description":"cabin description...",
     "furniture":[],
+    "fear": 2,
     "connections":[
         "grounds"
     ]

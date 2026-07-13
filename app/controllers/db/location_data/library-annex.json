@@ -2,6 +2,7 @@
     "display_name":"Library Annex",
     "description":"library annex description...",
     "furniture":[],
+    "fear": 4,
     "connections":[
         "stone_bridge",
         "transfiguration-room",

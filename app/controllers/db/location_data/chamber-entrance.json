@@ -1,0 +1,10 @@
+{
+    "display_name":"Entrance to the Chamber of Secrets",
+    "description":"...",
+    "furniture":[],
+    "fear": 16,
+    "connections":[
+        "myrtles-bathroom",
+        "chamber-secrets"
+    ]
+}

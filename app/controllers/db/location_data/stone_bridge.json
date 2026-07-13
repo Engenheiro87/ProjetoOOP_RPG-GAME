@@ -1,6 +1,7 @@
 {
     "display_name":"Stone Bridge",
     "furniture":[],
+    "fear": 4,
     "connections":[
         "entrance",
         "library-annex"

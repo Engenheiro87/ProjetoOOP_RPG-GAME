@@ -1,6 +1,7 @@
 {
     "display_name":"Paved Courtyard",
     "furniture":[],
+    "fear": 3,
     "connections":[
         "entrance"
     ]   

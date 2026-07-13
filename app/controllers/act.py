@@ -2,9 +2,13 @@ from dataclasses import dataclass, field;
 from app.models.location import Location;
 from app.models.furniture import Furniture;
 from app.controllers.data_record import StaticData;
-from app.models.character import NPC;
+from app.controllers.fight import Fight;
+from app.models.character import NPC, Monster;
 from app.models.cutscene import Cutscene;
 from app.models.dice import Dice;
+from random import randint;
+from uuid import uuid4;
+from threading import Thread;
 
 @dataclass
 class Act:
@@ -157,6 +161,8 @@ class Act:
         current_location = self.__current_location;
         if current_location.is_connected_to(target):
             self.__current_location = target;
+            if Dice().skill_test(target.fear_level)['success']:
+                self.new_fight();
             return True, {
                 "options":
                 {
@@ -168,6 +174,42 @@ class Act:
             }; # retorna True (sucesso) e as próximas opções no formato NOME FANTASIA : ID.
         else:
             return False, f"not_connected";
+
+    def new_fight(self):
+        fight = Fight(
+            {
+                "get_player_stats" : self.__dependencies['get_player_stats'],
+                "increase_stat":self.__dependencies['increase_stat'],
+                'play_cutscene':self.__dependencies['play_cutscene'],
+                'parse_lines':self.parse_lines,
+                "damage_player":self.__dependencies['damage_player']
+            }
+        );
+        monster = fight.monster;
+
+        def display_options():
+            self.__dependencies['prompt_player'](self.get_options_table([
+                {
+                    "display":f"Fight {monster.name}",
+                    "action": fight.attack_monster,
+                    "cutscene":lambda: self.__dependencies['play_cutscene'](
+                        Cutscene(self.parse_lines(["nar/You fight the monster!"]))
+                    ),
+                    "block_esc":True,
+                }  
+            ]), block_esc=True);
+        cutscene:Cutscene = Cutscene(self.parse_lines(
+                    [
+                        f"nar/A \"{monster.name}\" challenges you to a fight!",
+                        f"stat/Monster power: {monster.power}"
+                    ]
+                ),
+                display_options
+            )
+        self.__dependencies['play_cutscene'](
+            cutscene
+        );
+        return fight; 
 
     def inspect(self, furniture_name:str)->tuple[bool, str]|dict:
         furniture = self.__current_location.get_furniture(furniture_name);
@@ -262,7 +304,8 @@ class Act:
             48+i:{
                 "display":f"{i} - {choice['display']}",
                 "action":choice['action'],
-                "cutscene":choice.get('cutscene', None)
+                "cutscene":choice.get('cutscene', None),
+                "block_esc":choice.get("block_esc", False)
             }
             for i, choice in enumerate(choices, start=1)
         }

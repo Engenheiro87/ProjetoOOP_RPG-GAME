@@ -2,6 +2,7 @@
     "display_name":"Entrance Hall",
     "description":"entrance hall description...",
     "furniture":["wooden-desk"],
+    "fear":3,
     "connections":[
         "great_hall",
         "paved_courtyard",

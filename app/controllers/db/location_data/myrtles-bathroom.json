@@ -1,0 +1,10 @@
+{
+    "display_name":"Moaning Myrtle's Bathroom",
+    "description":"Silent and slippery",
+    "furniture":[],
+    "fear": 7,
+    "connections":[
+        "floor2",
+        "chamber-entrance"
+    ]
+}

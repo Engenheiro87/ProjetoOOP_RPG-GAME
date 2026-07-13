@@ -5,6 +5,7 @@ class ScreenData:
     location:str;
     background:str;
 
+    announcement:str = field(default_factory=str);
     character:str = field(default_factory=str);
     dialogue:str = field(default_factory=str);
     actions: tuple = field(default_factory=tuple);

@@ -2,6 +2,7 @@
     "display_name":"Transfiguration Classroom",
     "description":"transfiguration classroom description...",
     "furniture":[],
+    "fear": 3,
     "connections":[
         "library-annex"
     ]
